@@ -26,7 +26,10 @@ void draw(){
   getUserInput();
   background(255);
 
-  float[] vector = {100, (float)Math.toRadians(-45.0)};
+  float theta = (float)Math.atan(leftY/leftX);
+  float r = (float)leftY/(float)Math.sin(theta);
+
+  float[] vector = {r, theta};
   float[] origin1 = {200, 200};
   float[] origin2 = {300, 200};
   float[] origin3 = {200, 300};
