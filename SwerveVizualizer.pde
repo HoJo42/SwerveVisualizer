@@ -1,12 +1,29 @@
-float x1 = 0;
-float y1 = 0;
+import net.java.games.input.*;
+import org.gamecontrolplus.*;
+import org.gamecontrolplus.gui.*;
+
+ControlDevice controller;
+ControlIO control;
+
+float leftX;
+float leftY;
+float rightX;
+float rightY;
 
 void setup(){
   size(500, 500);
 
+  control = ControlIO.getInstance(this);
+  controller = control.getMatchedDevice("xboxSwerve");
+
+  if (controller == null){
+    println("Controller gone, awesome first showing as programming lead");
+    System.exit(-1);
+  }
 }
 
 void draw(){
+  getUserInput();
   background(255);
 
   float[] vector = {100, (float)Math.toRadians(-45.0)};
@@ -40,4 +57,11 @@ float[] polarToCartesian(float[] vector, float[] origin){
   float[] output = {nx + origin[0], ny + origin[1]};
 
   return output;
+}
+
+void getUserInput(){
+  leftX = map(controller.getSlider("leftStickX").getValue(), -1, 1, -100, 100);
+  leftY = map(controller.getSlider("leftStickY").getValue(), -1, 1, -100, 100);
+  rightX = map(controller.getSlider("rightStickX").getValue(), -1, 1, -100, 100);
+  rightY = map(controller.getSlider("rightStickY").getValue(), -1, 1, -100, 100);
 }
