@@ -9,16 +9,27 @@ void setup(){
 void draw(){
   background(255);
 
-  float[] vector = {100, (float)Math.toRadians(-90.0)};
+  float[] vector = {100, (float)Math.toRadians(-45.0)};
   float[] origin1 = {200, 200};
+  float[] origin2 = {300, 200};
+  float[] origin3 = {200, 300};
+  float[] origin4 = {300, 300};
 
   stroke(150);
   rect(200, 200, 100, 100);
 
   float[] points1 = polarToCartesian(vector, origin1);
   stroke(#7aeb34);
-  System.out.println(points1[0]);
   line(200, 200, points1[0], points1[1]);
+
+  float[] points2 = polarToCartesian(vector, origin2);
+  line(origin2[0], origin2[1], points2[0], points2[1]);
+
+  float[] points3 = polarToCartesian(vector, origin3);
+  line(origin3[0], origin3[1], points3[0], points3[1]);
+
+  float[] points4 = polarToCartesian(vector, origin4);
+  line(origin4[0], origin4[1], points4[0], points4[1]);
 
 }
 
