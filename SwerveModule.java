@@ -9,7 +9,7 @@ class SwerveModule {
     }
 
     public float[] calculateRotationVector(float controllerInput){
-        float[] output = {controllerInput, rotationAngle};
+        float[] output = {-controllerInput, rotationAngle};
         return output;
     }
 
