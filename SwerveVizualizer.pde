@@ -17,13 +17,13 @@ SwerveModule BottomLeft;
 
 void setup(){
   size(500, 500);
-    float rotationAngleTLBR = (float)Math.toRadians(225);
-    float rotationAngleTRBL = (float)Math.toRadians(225+90);
+    float rotationAngleTLBR = (float)Math.toRadians(225+90);
+    float rotationAngleTRBL = (float)Math.toRadians(225);
 
-    float[] originTR = {200, 200};
-    float[] originTL = {300, 200};
-    float[] originBR = {200, 300};
-    float[] originBL = {300, 300};
+    float[] originTL = {200, 200};
+    float[] originTR = {300, 200};
+    float[] originBR = {300, 300};
+    float[] originBL = {200, 300};
 
   control = ControlIO.getInstance(this);
   controller = control.getMatchedDevice("xboxSwerve");
@@ -49,24 +49,27 @@ void draw(){
 
   float[] transVector = {r, theta};
 
-  float[] rotVector = topRight.calculateRotationVector(rightX);
+  float[] rotVectorTR = topRight.calculateRotationVector(rightX);
+  float[] rotVectorTL = topLeft.calculateRotationVector(rightX);
+  float[] rotVectorBR = BottomRight.calculateRotationVector(rightX);
+  float[] rotVectorBL = BottomLeft.calculateRotationVector(rightX);
 
 
 
   stroke(150);
   rect(200, 200, 100, 100);
 
-  float[] pointsTR = polarToCartesian(rotVector, topRight.getOrigin());
+  float[] pointsTR = polarToCartesian(rotVectorTR, topRight.getOrigin());
   stroke(#7aeb34);
   line(topRight.getOrigin(0), topRight.getOrigin(1), pointsTR[0], pointsTR[1]);
 
-  float[] pointsTL = polarToCartesian(transVector, topLeft.getOrigin());
+  float[] pointsTL = polarToCartesian(rotVectorTL, topLeft.getOrigin());
   line(topLeft.getOrigin(0), topLeft.getOrigin(1), pointsTL[0], pointsTL[1]);
 
-  float[] pointsBR = polarToCartesian(transVector, BottomRight.getOrigin());
+  float[] pointsBR = polarToCartesian(rotVectorBR, BottomRight.getOrigin());
   line(BottomRight.getOrigin(0), BottomRight.getOrigin(1), pointsBR[0], pointsBR[1]);
 
-  float[] pointsBL = polarToCartesian(transVector, BottomLeft.getOrigin());
+  float[] pointsBL = polarToCartesian(rotVectorBL, BottomLeft.getOrigin());
   line(BottomLeft.getOrigin(0), BottomLeft.getOrigin(1), pointsBL[0], pointsBL[1]);
 }
 
