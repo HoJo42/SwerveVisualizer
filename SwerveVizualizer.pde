@@ -17,8 +17,10 @@ SwerveModule BottomLeft;
 
 void setup(){
   size(500, 500);
-    float rotationAngleTLBR = (float)Math.toRadians(225+90);
-    float rotationAngleTRBL = (float)Math.toRadians(225);
+    float rotationAngleTR = (float)Math.toRadians(225);
+    float rotationAngleTL = (float)Math.toRadians(135);
+    float rotationAngleBR = (float)Math.toRadians(315);
+    float rotationAngleBL = (float)Math.toRadians(45);
 
     float[] originTL = {200, 200};
     float[] originTR = {300, 200};
@@ -28,10 +30,10 @@ void setup(){
   control = ControlIO.getInstance(this);
   controller = control.getMatchedDevice("xboxSwerve");
 
-  topRight = new SwerveModule(originTR, rotationAngleTRBL);
-  topLeft = new SwerveModule(originTL, rotationAngleTLBR);
-  BottomRight = new SwerveModule(originBR, rotationAngleTLBR);
-  BottomLeft = new SwerveModule(originBL, rotationAngleTRBL);
+  topRight = new SwerveModule(originTR, rotationAngleTR);
+  topLeft = new SwerveModule(originTL, rotationAngleTL);
+  BottomRight = new SwerveModule(originBR, rotationAngleBR);
+  BottomLeft = new SwerveModule(originBL, rotationAngleBL);
 
 
   if (controller == null){
