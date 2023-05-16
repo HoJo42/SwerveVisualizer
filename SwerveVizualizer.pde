@@ -56,22 +56,25 @@ void draw(){
   float[] rotVectorBR = BottomRight.calculateRotationVector(rightX);
   float[] rotVectorBL = BottomLeft.calculateRotationVector(rightX);
 
-
+  float[] totalVectorTR = addVectors(rotVectorTR, transVector); //TODO: fix the combonation
+  float[] totalVectorTL = addVectors(rotVectorTL, transVector);
+  float[] totalVectorBR = addVectors(rotVectorBR, transVector);
+  float[] totalVectorBL = addVectors(rotVectorBL, transVector);
 
   stroke(150);
   rect(200, 200, 100, 100);
 
-  float[] pointsTR = polarToCartesian(rotVectorTR, topRight.getOrigin());
+  float[] pointsTR = polarToCartesian(totalVectorTR, topRight.getOrigin());
   stroke(#7aeb34);
   line(topRight.getOrigin(0), topRight.getOrigin(1), pointsTR[0], pointsTR[1]);
 
-  float[] pointsTL = polarToCartesian(rotVectorTL, topLeft.getOrigin());
+  float[] pointsTL = polarToCartesian(totalVectorTL, topLeft.getOrigin());
   line(topLeft.getOrigin(0), topLeft.getOrigin(1), pointsTL[0], pointsTL[1]);
 
-  float[] pointsBR = polarToCartesian(rotVectorBR, BottomRight.getOrigin());
+  float[] pointsBR = polarToCartesian(totalVectorBR, BottomRight.getOrigin());
   line(BottomRight.getOrigin(0), BottomRight.getOrigin(1), pointsBR[0], pointsBR[1]);
 
-  float[] pointsBL = polarToCartesian(rotVectorBL, BottomLeft.getOrigin());
+  float[] pointsBL = polarToCartesian(totalVectorBL, BottomLeft.getOrigin());
   line(BottomLeft.getOrigin(0), BottomLeft.getOrigin(1), pointsBL[0], pointsBL[1]);
 }
 
@@ -90,4 +93,11 @@ void getUserInput(){
   rightX = map(controller.getSlider("rightStickX").getValue(), -1, 1, -100, 100);
   println(rightX);
   rightY = map(controller.getSlider("rightStickY").getValue(), -1, 1, -100, 100);
+}
+
+float[] addVectors(float[] vector1, float[] vector2){
+  float nx = vector1[0] + vector2[0];
+  float ny = vector1[1] + vector2[1];
+  float[] output = {nx, ny};
+  return output;
 }
