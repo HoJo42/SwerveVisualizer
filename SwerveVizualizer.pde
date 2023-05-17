@@ -46,8 +46,9 @@ void draw(){
   getUserInput();
   background(255);
 
-  float theta = (float)Math.atan(leftY/leftX);
+  float theta = (float)Math.atan2((double)leftY, (double)leftX);
   float r = (float)leftY/(float)Math.sin(theta);
+  println(theta);
 
   float[] transVector = {r, theta};
 
@@ -88,6 +89,6 @@ void getUserInput(){
   leftX = map(controller.getSlider("leftStickX").getValue(), -1, 1, -100, 100);
   leftY = map(controller.getSlider("leftStickY").getValue(), -1, 1, -100, 100);
   rightX = map(controller.getSlider("rightStickX").getValue(), -1, 1, -100, 100);
-  println(rightX);
+  // println(rightX);
   rightY = map(controller.getSlider("rightStickY").getValue(), -1, 1, -100, 100);
 }
